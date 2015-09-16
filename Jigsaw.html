@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>jQuery snapPuzzle Plugin</title>
+    <!-- CSS -->
+        <!-- Main CSS -->
+    <link rel="stylesheet" type="text/css" href="CSS/Jigsaw.css">
+    <style>
+    /* required snapPuzzle styles */
+.snappuzzle-wrap {
+    position: relative; 
+    display: block; 
+}
+.snappuzzle-pile {
+    position: absolute; 
+}        
+.snappuzzle-piece {
+    cursor: move;
+}
+.snappuzzle-slot {
+    position: absolute; 
+    background: #fff; 
+    opacity: .3;
+    border:1px solid white;
+}
+.snappuzzle-slot-hover {
+    background: #eee; 
+}
+    </style>
+</head>
+<body>  
+    <div id="container">
+        <!-- HOME DIV -->
+    <div id="home_div">
+        <div id="wall-3">
+            <video controls muted autoplay loop controls id="frank_video" width= 2560px>
+                <source src="/Video/FRANK%20by%20OCBC-%20OCBC%20Pay%20Anyone%E2%84%A2%20means%20Pay%20Anyone%20(1).mp4">
+            </video>
+<!--            <h1>BOARD 2</h1>-->
+        </div> <!--END OF WALL 2-->
+        
+        <div id="wall-1">      
+            <button id="play_button" onClick="nextPage_home_to_instruction()">Touch to Begin</button>
+        </div> <!--END OF WALL 1-->
+        
+    </div>    
+        <!-- INSTRUCTION DIV -->
+    <div id="instruction_div">
+        <div id="instruction_left">
+            <h1 id="instruction_header" class="h1_class">INSTRUCTIONS</h1>
+            <p id="instruction_text">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</p>
+            <button id="button_to_puzzle" onclick="nextPage_instruction_to_preview()">Start Playing</button>
+        </div>
+        <div id="prizelist_right">
+            <p><span class="header_text">Prize List</span></p>
+            <div id="scrollbar_container">
+            <div id="prizelist_div">
+            <ul class="list_class">
+                <li>Item 1&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 1000pts</li>
+                <li>Item 2&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 1000pts</li>
+                <li>Item 3&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 1000pts</li>
+                <li>Item 4&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 1000pts</li>
+                <li>Item 5&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 1000pts</li>
+                <li>Item 6&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 1000pts</li>
+                <li>Item 7&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 1000pts</li>
+                <li>Item 8&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 1000pts</li>
+                <li>Item 9&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 1000pts</li>
+                <li>Item 10 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp1000pts</li>
+                
+            </ul>
+            </div>
+            </div>
+        </div>
+    </div>
+        <!-- PUZZLE DIV --> 
+    <div id="puzzle-containment" style="border-top: 1px solid #eee;border-bottom:1px solid #eee;background:#fafafa;text-align:center">
+        <div id="left_board">        
+        <img id="source_image" src="/Artwork/Frank_By_ocbc_Artwork.png">
+            </div>
+            <div id="widthchanged"> <!-- pile -->
+                <button id="time_extension_button" onclick="extend_timer()"=>TOUCH</button>  
+                <div id="stats_div">
+                    <p class="p_class" id="level_id">Level: <span id="level_number_id">1</span></p>
+                    <p class="p_class" id="moves_id">Moves made: <span id="moves_number_id">0</span></p>
+                    <p class="p_class" id="score_id">High Score: <span id="score_number_id">0</span></p>
+                </div>
+                <div id="timerdiv">
+                    <h1 class="h1_class"><span id="time">00:45</span></h1>   
+                    <div id="time_Point">
+                        <h1>Time Extension Chances</h1>
+                        <canvas id="timePoint_1" width="100" height="100" style="border:1px solid black; background-color: red;"></canvas>
+                        <canvas id="timePoint_2" width="100" height="100" style="border:1px solid black; background-color: red;"></canvas>
+                        <canvas id="timePoint_3" width="100" height="100" style="border:1px solid black; background-color: red;"></canvas>
+                    </div>
+                </div>
+                <div id="pile">  
+                    
+<!--
+                    <div id="puzzle_solved" style="display:none;text-align:center;position:relative;top:25%">
+                        <h2 id="well_done" style="margin:0 0 20px">Well done!</h2>
+                        <h2 id="try_again" style="margin:0 0 20px">Try Again!</h2>
+                        <a class="restart-puzzle" href="home.html">Back to MENU</a>
+                        <a class="restart-puzzle" data-grid="3">Restart Puzzle</a>
+                        <br><br>
+                        <a href="#" class="restart-puzzle" data-grid="5">5x5</a>
+                        &nbsp; <a href="#" class="restart-puzzle" data-grid="7">7x7</a>
+                        &nbsp; <a href="#" class="restart-puzzle" data-grid="10">10x10</a>
+-->
+                                                                                                    
+                </div> <!-- END OF PILE -->
+            </div> <!-- END OF WIDTHCHANGED -->
+        </div> <!-- END OF PUZZLE CONTAINER-->
+    <div id="score_screen">
+        <div id="left_score_screen">
+            <h1>Score Screen</h1>
+        </div>
+        <div id="right_score_screen">
+            <button onClick="nextPage_score_to_home()">Restart Game</button>
+        </div>
+    </div>
+    <div id="preview_screen">
+        <div id="preview_screen_left">
+<!--            <h1 class="h1_class" style="5em">Preview</h1>-->
+                <p class="p_class preview_level_class" id="preview_level_id">Level: <span id="preview_level_number_id">1</span></p>
+            <img id="preview_image" src="/Artwork/Frank_By_ocbc_Artwork.png" >
+            <img id="source_image">
+        </div>
+        <div id="preview_screen_right">
+            <p id=preview_time>9</p>
+            <button id="startButton" onClick="nextPage_preview_to_puzzle()">TO PUZZLE</button>
+        </div>
+    </div>
+    </div> <!-- END OF CONTAINER -->
+    
+    <!-- Script Sources -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+    <script src="/JS/jquery.snap-puzzle.js"></script>
+    <script>
+        /* Home Page Functions */
+        var frankVideo = document.getElementById("frank_video");
+        function playVideo(){
+            frankVideo.play();
+        }
+        
+        
+        function nextPage_home_to_instruction(){    
+//            $("#home_div").fadeOut(3000);
+            document.getElementById("home_div").style.visibility = "hidden";
+            document.getElementById("instruction_div").style.visibility = "visible";
+            scrollingInterval();
+            }
+        /* End Of Home Page Functions */
+                   
+        /* INSTRUCTION PAGE FUNCTIONS */
+            function nextPage_instruction_to_preview(){    
+                document.getElementById("preview_screen").style.visibility = "visible";
+                document.getElementById("instruction_div").style.visibility = "hidden";
+                display = document.querySelector('#preview_time');
+                startPreviewTimer(previewTimeDown, display);
+            }
+        /* END OF INSTRUCTION PAGE FUNCTIONS */
+        
+        /* PREVIEW SCREEN FUNCTIONS */
+
+        /* END OF PREVIEW SCREEN FUNCTIONS */
+        
+        /* INIT PUZZLE FUNCTIONS */
+        function start_puzzle(x){
+            $('#puzzle_solved').hide();
+            
+            $('#source_image').snapPuzzle({
+                rows: x, columns: x,
+                pile: '#pile',
+                containment: '#puzzle-containment',
+                onComplete: function(){
+                    $('#source_image').fadeOut(150).fadeIn();
+                        $('#source_image').snapPuzzle('destroy');
+                    stopTimer();
+                    completePuzzle_to_preview();
+                    initPreviewTimer();
+                }
+            });
+        }
+
+            $(function(){
+            $('#pile').height(1240);
+
+            
+
+            $('.restart-puzzle').click(function(){
+                $('#source_image').snapPuzzle('destroy');
+                start_puzzle($(this).data('grid'));
+            });
+
+            $(window).resize(function(){
+                $('#pile').height($('#source_image').height());
+                $('#source_image').snapPuzzle('refresh');
+            });
+        });
+        /* END OF INIT PUZZLE FUNCTIONS */
+        
+        /* PUZZLE PAGE FUNCTIONS */
+        function nextPage_puzzle_to_score(){    
+        document.getElementById("puzzle-containment").style.visibility = "hidden";
+        document.getElementById("score_screen").style.visibility = "visible";
+        }
+        /* END OF PUZZLE PAGE FUNCTIONS */
+        
+        /* TIMER FUNCTIONS */
+        var previewTimeDown = 9;
+        var timeDown = 45;
+        var setTimer;
+        var timer;
+        var seconds;
+        function startTimer(duration, display) {
+        var timer = duration, minutes, seconds;
+        setTimer = setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+        timeDown = timeDown - 1;
+        if (--timer <0) {
+            
+            clearInterval(setTimer);
+            nextPage_puzzle_to_score();
+            levelCounter();
+            $('#source_image').snapPuzzle('destroy');
+            
+        }
+        }, 1000);
+        }
+        
+        function stopTimer(){
+            clearInterval(setTimer);
+        }
+        
+        function extend_timer(){
+            clearInterval(setTimer);
+            timeDown = timeDown + 15;
+            display = document.querySelector('#time');
+            startTimer(timeDown, display); 
+            useTimePoint();
+        }
+        
+        var timePoint_number = 3;
+        function useTimePoint(){
+            $("#timePoint_" + timePoint_number).fadeOut(1500);
+            timePoint_number--;
+            if (timePoint_number == 0){
+                document.getElementById("time_extension_button").disabled = true;
+            }
+        }
+        
+        function startPreviewTimer(duration, display){
+        var timer = duration;
+        setPreviewTimer = setInterval(function (){
+            
+            display.textContent = timer;
+            if (--timer < 0){
+                clearInterval(setPreviewTimer);
+                nextPage_preview_to_puzzle();
+        }
+        }, 1000);
+        }
+        
+        function initPreviewTimer(){
+            var timeDown = 9;
+            display = document.querySelector('#preview_time');
+            startPreviewTimer(timeDown, display);
+        }
+        
+            function initGameTimer(time){
+            var timeDown = 9;
+            display = document.querySelector('#preview_time');
+            startPreviewTimer(timeDown, display);
+        }
+        
+            function grabCurrentTime(seconds){
+                console.log(seconds);
+                return seconds;
+            }
+        
+            /*  TEST TIMER FUNCTION */
+                var timeout = null;
+                var test_time = null;
+            /* END OF TEST TIMER FUNCTION */
+        
+        /* END OF TIMER FUNCTIONS */
+        
+        /* SCORE SCREEN FUNCTIONS */
+        function nextPage_score_to_home(){    
+        document.getElementById("score_screen").style.visibility = "hidden";
+        document.getElementById("home_div").style.visibility = "visible";      
+        }  
+        
+        function nextPage_preview_to_puzzle(){  
+        var display = document.querySelector('#time');
+//        startTimer(timeDown, display);
+        levelChecker();
+        start_puzzle(2);
+        document.getElementById("preview_screen").style.visibility = "hidden";
+        document.getElementById("puzzle-containment").style.visibility = "visible";      
+        }  
+        /* END OF SCORE SCREEN FUNCTIONS */
+        
+        /* MISC FUNCTIONS */
+            var currentLevel = 1;
+            var currentMove = 0;
+            function levelCounter(){
+                currentLevel++;
+                document.getElementById("level_number_id").innerHTML = currentLevel;
+                document.getElementById("preview_level_number_id").innerHTML = currentLevel;
+            }
+        
+            function levelChecker(){
+                switch (currentLevel){
+                    case 1: document.getElementById("source_image").src="/Artwork/Frank_By_ocbc_Artwork.png";
+                            document.getElementById("preview_image").src="/Artwork/Frank_By_ocbc_Artwork.png";
+                            break;
+                    case 2: document.getElementById("source_image").src="Artwork/1767160.jpg";   
+                            document.getElementById("preview_image").src="Artwork/1767160.jpg";   
+                            timeDown = 40;
+                            break;
+                    case 3: document.getElementById("source_image").src="Artwork/Fire-Ice-Fist-2560x1440.jpg";
+                            document.getElementById("preview_image").src="Artwork/Moon-and-Earth-close-up_2560x1600.jpg";
+                            timeDown = 35;
+                            break;
+                    case 4: document.getElementById("source_image").src="Artwork/2560x1440placeholder.jpg";  
+                            document.getElementById("preview_image").src="Artwork/2560x1440placeholder.jpg";  
+                            timeDown = 30;
+                            break;
+                    case 5: document.getElementById("source_image").src="Artwork/ws_Eclipse_2560x1440.jpg";   
+                            document.getElementById("preview_image").src="Artwork/ws_Eclipse_2560x1440.jpg";   
+                            timeDown = 25;
+                            break;
+                        
+                    default: document.getElementById("source_image").src="http://p1.pichost.me/i/53/1767160.jpg";   
+                }
+            }
+            
+        function completePuzzle_to_preview(){
+            document.getElementById("puzzle-containment").style.visibility = "hidden";
+            document.getElementById("preview_screen").style.visibility = "visible";
+            levelCounter();
+            levelChecker();
+        }      
+        
+        /* Scrolling Function */
+            var scrolled = 0;
+    //            function scrollDown(){
+    //            scrolled =  scrolled - 300;
+    //                
+    //            $("#prizelist_div").animate({
+    //                scrollTop: scrolled
+    //            });
+    //            }
+        
+            function scrollDown(){
+			scrolled=scrolled+500;
+				
+			$("#prizelist_div").animate({
+			    scrollTop:  scrolled,
+                easing: 'linear'
+			   }, 10000);
+			}; 
+        
+            function scrollUp(){
+			scrolled=scrolled-500;
+				
+			$("#prizelist_div").animate({
+			    scrollTop:  scrolled,
+                easing: 'linear'
+			   }, 10000);
+			}; 
+
+                  
+            function scrollingInterval(){
+                setInterval(function(){
+                    scrollDown();    
+                    scrollUp();
+                }, 1000);
+            }
+        
+        /* END OF SCROLLING FUNCTION */
+            
+        /* END OF MISC FUNCTIONS */
+        
+        /* RESTART FUNCTION */
+            function restartGame(){
+                currentLevel = 1;
+                timeDown = 45;
+                $('#source_image').snapPuzzle('destroy');
+                nextPage_score_to_home();
+            }
+        /* END OF RESTART FUNCTION */
+        
+        /* HIGH SCORE FUNCTION */
+        $("#snappuzzle-piece-id_0_0").css({ border: '50px solid red' });
+//            $("snappuzzle-piece-id 0_1").addEventListener("click", check_For_Click);
+//            document.getElementById("div#snappuzzle-piece-id 0_0").addEventListener("click", check_For_Click);
+            function check_For_Click(){
+                currentMove = currentMove + 1;
+                document.getElementById("moves_number_id").innerHTML = currentMove; 
+                console.log("clicked!" + currentMove);
+            }
+        /* END OF HIGH SCORE FUNCTION */
+    </script>
+</body>
+</html>

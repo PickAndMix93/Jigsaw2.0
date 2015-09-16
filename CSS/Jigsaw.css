@@ -1,0 +1,348 @@
+
+
+
+body {
+    width: 3840px;
+    height: 1440px;
+    background-color: black; 
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+}
+
+#puzzle-containment {
+    width: 3840px;
+    height: 1440px;
+    float: left;
+    visibility: hidden;
+    position: absolute;
+    z-index: 8;
+    padding: 0px;
+    margin: 0px;
+}
+
+#pile {
+    height: 1440px;
+}
+
+#widthchanged {
+    width: 1280px;
+    height: 1440px;
+    float: left;
+    margin: 0px;
+    padding: 0px;
+}
+
+#timerdiv {
+    width:198px;
+    height:1440px;
+/*    background-image: url("http://7-themes.com/data_images/out/37/6895187-black-abstract.jpg");*/
+/*    box-shadow: 10px 10px 20px #888888;*/
+/*    border-left:1px solid black;*/
+/*    background-image:url("/Images/timerdivimage.jpg");*/
+    background-color: gray;;
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    border-left:  1px solid black;
+}
+
+
+#left_board {
+    float: left;
+}
+
+#instruction_left {
+    background-color:red;
+    height: 1440px;
+    width: 2560px;
+    float: left;
+}
+
+#prizelist_right {
+    background-color: blue;
+    height: 1440px;
+    width: 1280px;
+    float: left;
+}
+
+#instruction_div {
+    position: absolute;
+    z-index: 10;
+    visibility: hidden;
+}
+
+
+body {
+    width: 3840px;
+    height: 1440px;
+    padding: 0px;
+    margin: 0px;
+}
+
+#wall-1 {
+    width: 1280px;
+    height: 1440px;
+    background-image: url('/Artwork/board1realbg.jpg');
+    float: left;
+}
+
+
+#wall-3 {
+    width: 2560px;
+    height: 1440px;
+    background-color: green;
+    float: left;
+}
+
+
+
+#play_button {
+    margin-top: 1000px;
+    margin-left: 440px;
+    width: 400px;
+    height: 105px;
+    background-image: url("/Artwork/ocbcbuttonbg.jpg");
+    font-size:3em;
+    color:white;
+    font-family: 'TheSansSemiBoldPlain', Helvetica, Arial, sans-serif;
+    border-radius: 30px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -10px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);  
+}
+
+
+#home_div {
+    position: absolute;
+    z-index: 11;
+}
+
+#move {
+    float: right;
+    margin-right: 500px;
+}
+
+#score {
+    float: left;
+    margin-left: 30px;
+}
+
+#score_digit {
+    float: left;
+    margin-left: 30px;
+}
+
+#score_div {
+    position: absolute;
+    z-index: 8;
+    visibility: hidden;
+}
+
+#scorepage_left {
+    width: 2560px;
+    height: 1440px;
+    float: left;
+    background-color: red;
+}
+
+#scorepage_right {
+    height: 1440px;
+    width: 1280px;
+    float: left;
+    background-color: blue;
+}
+
+#time {
+    font-size: 2em;
+}
+
+#left_score_screen {
+    height: 1440px;
+    width: 2560px;
+    float: left;
+    background-color: red;  
+}
+
+#right_score_screen {
+    width: 1280px;
+    height: 1440px;
+    float: left;
+    background-color: blue;
+}
+
+#score_screen {
+    position: absolute;
+    z-index: 7;
+    visibility: hidden;
+}
+
+li {
+    list-style-type: none;
+    font-size: 5em;
+    padding: 30px;
+}
+
+.header_text {
+    font-size: 10em;
+    font-weight: bold;
+    text-align: center;
+    margin-left: 300px;
+    
+}
+
+ul {
+}
+
+#prizelist_div {
+	
+}::-webkit-scrollbar {
+    width: 1em;
+}
+
+#prizelist_div {
+    background-color: green;
+    height: 1100px;
+    width: 1280px;
+    overflow: auto;
+    position: absolute;
+}
+
+#prizelist_div .inner {
+    overflow: hidden;
+}
+
+#button_to_puzzle {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 250px;
+/*    width: 500px;*/
+/*    text-align: center;*/
+    font-size: 5em;
+}
+
+#stats_div {
+    height:200px;
+    width: 1079px;
+    float: left;
+    background-color: gray;
+    border-bottom: 1px solid black;
+/*    border-right:1px solid black;*/
+}
+
+
+
+.p_class {
+    font-size:4em;
+    font-weight: bold;
+    margin: 20px;
+/*    text-align: center;*/
+}
+
+#moves_id {
+    margin-right: 150px;
+    display: inline;
+}
+
+.h1_class {
+    text-align: center;
+    font-size: 2em;
+    margin-top: 50px;
+}
+
+#preview_screen {
+    position: absolute;
+    z-index: 9;
+    visibility: hidden;
+/*    overflow: hidden;*/
+}
+
+#preview_screen_left {
+    height: 1440px;
+    width: 2560px;
+    float: left;
+    background-color: red;
+}
+
+#preview_screen_right {
+    width: 1280px;
+    height: 1440px;
+    float: left;
+    background-color: blue;
+    overflow: hidden;
+}
+
+#preview_image {
+    height: 1080px;
+    width: 1920px;
+    margin-left:300px;
+    margin-top: 50px;
+}
+
+#preview_time {
+    font-size: 100em;
+    padding: 0px;
+    color: white;
+    margin-top: -250px;
+    margin-left: 200px;
+}
+
+#startButton {
+    position: absolute;
+    margin-top:-2000px;
+}
+
+#container {
+    overflow: hidden;
+}
+
+.list_class {
+}
+
+#scrollbar_container {
+    overflow: hidden;
+    
+}
+
+#time_extension_button {
+    font-size: 10em;
+    margin-top: 1200px;
+    position: absolute;
+    margin-left: 450px;
+    display: block;
+}
+
+#instruction_header {
+    font-size: 10em;
+    font-weight: bold;
+}
+
+#instruction_text {
+    margin-left: auto;
+    margin-right: auto;
+/*    text-align: center;*/
+    font-size: 5em;
+    width: 1800px;
+    display: block;
+}
+
+#time_Point {
+    margin-top: 700px;
+}
+
+#timePoint_2 {
+    margin-top: 50px;
+}
+
+#timePoint_3 {
+    margin-top: 50px;
+}
+
+#score_id {
+    display: inline;
+}
+
+.preview_level_class {
+    text-align: center;
+    font-weight: bold;
+    font-size: 8em;
+}
